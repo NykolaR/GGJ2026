@@ -1,0 +1,19 @@
+# Godot 4+ specific ignores
+/GGJ2026/.godot/
+
+# Godot-specific ignores
+/GGJ2026/.import/
+/GGJ2026/export.cfg
+/GGJ2026/export_presets.cfg
+
+# Imported translations (automatically generated from CSV files)
+*.translation
+
+# Mono-specific ignores
+/GGJ2026/.mono/
+/GGJ2026/data_*/
+/GGJ2026/mono_crash.*.json
+
+# project specific
+# default gitignore ignores assets, we'll probably push assets, our asset folder will be Assets so leaving the line in anyway
+/GGJ2026/addons/
