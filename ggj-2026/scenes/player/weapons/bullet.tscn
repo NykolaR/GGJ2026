@@ -12,6 +12,7 @@ shader_parameter/cull_distance_override = 0.0
 shader_parameter/convert_vertex_colors = false
 
 [node name="Bullet" type="RayCast3D" unique_id=132572255]
+visible = false
 target_position = Vector3(0, 0, -1)
 debug_shape_thickness = 1
 script = ExtResource("1_fvo7p")
@@ -21,10 +22,7 @@ script = ExtResource("1_fvo7p")
 [node name="pipe" parent="Visual" unique_id=1317619610 instance=ExtResource("2_q7tbw")]
 transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, -0.5)
 
-[node name="Cylinder" parent="Visual/pipe" index="0" unique_id=808322116]
+[node name="Cylinder" parent="Visual/pipe" index="0" unique_id=1797429039]
 surface_material_override/0 = SubResource("ShaderMaterial_cc0p6")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1267605123]
-material_override = SubResource("ShaderMaterial_cc0p6")
 
 [editable path="Visual/pipe"]

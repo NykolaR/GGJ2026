@@ -10,7 +10,6 @@ var target: Vector3 = Vector3.ZERO
 
 
 func _ready() -> void:
-	visual.scale.z = range
 	target_position = Vector3(0, 0, -range)
 	look_at(target)
 	rotate_x(randf_range(-spread, spread))
@@ -21,5 +20,10 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	force_raycast_update()
 	if is_colliding():
-		pass
-	queue_free()
+		visual.scale.z = global_position.distance_to(get_collision_point())
+		top_level = true
+	else:
+		visual.scale.z = range
+	show()
+	set_physics_process(false)
+	get_tree().physics_frame.connect(queue_free)

@@ -117,5 +117,5 @@ texture_lod_halve_distance={
 }
 vertex_snap_intensity={
 "type": "int",
-"value": 2
+"value": 0
 }
