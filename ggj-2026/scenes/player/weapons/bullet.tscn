@@ -14,10 +14,11 @@ shader_parameter/convert_vertex_colors = false
 [node name="Bullet" type="RayCast3D" unique_id=132572255]
 visible = false
 target_position = Vector3(0, 0, -1)
-collision_mask = 4
+collision_mask = 5
 collide_with_areas = true
 debug_shape_thickness = 1
 script = ExtResource("1_fvo7p")
+range = 50.0
 
 [node name="Visual" type="Node3D" parent="." unique_id=636993632]
 

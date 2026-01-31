@@ -21,14 +21,14 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	force_raycast_update()
+	visual.scale.z = range
 	if is_colliding():
 		visual.scale.z = global_position.distance_to(get_collision_point())
 		top_level = true
 		var col: Enemy = get_collider() as Enemy
 		if col:
 			col.hit(1)
-	else:
-		visual.scale.z = range
+	
 	show()
 	set_physics_process(false)
-	get_tree().physics_frame.connect(queue_free)
+	get_tree().create_timer(0.1).timeout.connect(queue_free)
