@@ -61,10 +61,10 @@ script = ExtResource("2_dovo2")
 
 [node name="RotX" type="Node3D" parent="RotY" unique_id=1158049050]
 
-[node name="hand" parent="RotY/RotX" unique_id=481747273 instance=ExtResource("3_p47bc")]
+[node name="hand" parent="RotY/RotX" unique_id=2065130696 instance=ExtResource("3_p47bc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20633817, -0.16909224, -5.9604645e-08)
 
-[node name="Skeleton3D" parent="RotY/RotX/hand/Arm-Armature" parent_id_path=PackedInt32Array(481747273, 674960602) index="0" unique_id=1268595497]
+[node name="Skeleton3D" parent="RotY/RotX/hand/Arm-Armature" parent_id_path=PackedInt32Array(2065130696, 329330413) index="0" unique_id=1417654798]
 bones/0/rotation = Quaternion(-0.5, 0.50000006, -0.5, 0.5)
 bones/3/rotation = Quaternion(7.700781e-16, -1.04649094e-16, -0.13465647, 0.99089235)
 bones/4/rotation = Quaternion(0.026809711, -0.017022237, 0.53496635, 0.8442763)
@@ -74,7 +74,7 @@ bones/7/rotation = Quaternion(-0.8679884, -0.12654175, 0.06079825, 0.47632664)
 bones/8/rotation = Quaternion(-0.49338496, -0.20599963, -0.3010631, 0.78961784)
 bones/9/rotation = Quaternion(-0.7028759, -0.31664586, 0.2649731, 0.5792151)
 
-[node name="Arm" parent="RotY/RotX/hand/Arm-Armature/Skeleton3D" index="0" unique_id=1504286211]
+[node name="Arm" parent="RotY/RotX/hand/Arm-Armature/Skeleton3D" index="0" unique_id=1151002556]
 surface_material_override/0 = SubResource("ShaderMaterial_qek5x")
 
 [node name="PistolBulletSpawn" type="Node3D" parent="RotY/RotX/hand/Arm-Armature/Skeleton3D/Arm" index="0" unique_id=357589825]
