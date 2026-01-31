@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bdo137g8jh7wv" path="res://assets/models/hand.gltf" id="3_p47bc"]
 [ext_resource type="Shader" uid="uid://bf64br441qj8r" path="res://ursc/spatial/standard/standard_opaque.gdshader" id="4_75vfm"]
 [ext_resource type="Texture2D" uid="uid://cmih2cv56laqg" path="res://assets/textures/arm.png" id="5_0owmy"]
+[ext_resource type="Texture2D" uid="uid://d3xymnflgx3t4" path="res://assets/textures/mask.png" id="6_75vfm"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_dovo2"]
 radius = 0.2
@@ -91,6 +92,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("6_75vfm")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=464300849]
 root_node = NodePath("../RotY/RotX/hand")
