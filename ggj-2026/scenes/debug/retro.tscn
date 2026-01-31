@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://bakba34bumln3"]
+
+[ext_resource type="Shader" uid="uid://b7f6rfujsre3p" path="res://ursc/canvas_item/dithering.gdshader" id="1_bqseu"]
+[ext_resource type="Texture2D" uid="uid://dkxyrwfrvgexk" path="res://assets/textures/dither.png" id="2_maams"]
+[ext_resource type="PackedScene" uid="uid://bqj60x1nsw1w0" path="res://scenes/debug/debug.tscn" id="3_av7n4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m0nke"]
+shader = ExtResource("1_bqseu")
+shader_parameter/color_depth = 16.0
+shader_parameter/dithering_pattern_texture = ExtResource("2_maams")
+
+[node name="Retro" type="Node" unique_id=2027053121]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1864483319]
+texture_filter = 1
+material = SubResource("ShaderMaterial_m0nke")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+stretch_shrink = 4
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=793988736]
+handle_input_locally = false
+size = Vector2i(288, 162)
+render_target_update_mode = 4
+
+[node name="Debug" parent="SubViewportContainer/SubViewport" unique_id=1680230417 instance=ExtResource("3_av7n4")]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1273947601]
+visible = false
+material = SubResource("ShaderMaterial_m0nke")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

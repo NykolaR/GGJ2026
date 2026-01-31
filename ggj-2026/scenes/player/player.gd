@@ -1,10 +1,14 @@
 extends CharacterBody3D
 
+const BULLET: PackedScene = preload("res://scenes/player/weapons/bullet.tscn")
+const Bullet: GDScript = preload("res://scenes/player/weapons/bullet.gd")
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
 @export var camera: Node3D
+@onready var animation: AnimationNodeStateMachinePlayback = $AnimationTree.get("parameters/playback") as AnimationNodeStateMachinePlayback
+@onready var pistol_bullet_spawn: Node3D = $"RotY/RotX/hand/Arm-Armature/Skeleton3D/Arm/PistolBulletSpawn" as Node3D
 
 
 func _physics_process(delta: float) -> void:
@@ -28,3 +32,16 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 	
 	move_and_slide()
+	
+	if Input.is_action_just_pressed(&"shoot"):
+		animation.start(&"Pistol-shoot")
+	elif Input.is_action_pressed(&"shoot"):
+		animation.travel(&"Pistol-shoot")
+
+
+func _on_animation_tree_animation_started(anim_name: StringName) -> void:
+	match anim_name:
+		&"Pistol-shoot":
+			var b: Bullet = BULLET.instantiate()
+			b.target = $"RotY/RotX/hand/Arm-Armature/Skeleton3D/Arm/PistolBulletTarget".global_position
+			pistol_bullet_spawn.add_child(b)

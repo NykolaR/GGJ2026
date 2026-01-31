@@ -2,9 +2,50 @@
 
 [ext_resource type="Script" uid="uid://cf53kslt6j2ps" path="res://scenes/player/player.gd" id="1_8afob"]
 [ext_resource type="Script" uid="uid://bcvcsmlou8eew" path="res://scenes/player/camera.gd" id="2_dovo2"]
+[ext_resource type="PackedScene" uid="uid://bdo137g8jh7wv" path="res://assets/models/hand.gltf" id="3_p47bc"]
+[ext_resource type="Shader" uid="uid://bf64br441qj8r" path="res://ursc/spatial/standard/standard_opaque.gdshader" id="4_75vfm"]
+[ext_resource type="Texture2D" uid="uid://cmih2cv56laqg" path="res://assets/textures/arm.png" id="5_0owmy"]
+[ext_resource type="Texture2D" uid="uid://d3xymnflgx3t4" path="res://assets/textures/mask.png" id="6_75vfm"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_dovo2"]
 radius = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qek5x"]
+render_priority = 0
+shader = ExtResource("4_75vfm")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = ExtResource("5_0owmy")
+shader_parameter/albedo_texture_as_primary_color = true
+shader_parameter/mix_factor = 1.0
+shader_parameter/texture_lod_halve_distance_override = 0.0
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_scroll_speed = Vector2(0, 0)
+shader_parameter/cull_distance_override = 0.0
+shader_parameter/convert_vertex_colors = false
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p47bc"]
+animation = &"Pistol-idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_75vfm"]
+animation = &"Pistol-shoot"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0owmy"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qek5x"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5gtgg"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_h17s1"]
+states/Pistol-idle/node = SubResource("AnimationNodeAnimation_p47bc")
+states/Pistol-idle/position = Vector2(400.88672, 100)
+states/Pistol-shoot/node = SubResource("AnimationNodeAnimation_75vfm")
+states/Pistol-shoot/position = Vector2(400.88672, 213.67188)
+states/Start/position = Vector2(198.33984, 100)
+transitions = ["Pistol-idle", "Pistol-shoot", SubResource("AnimationNodeStateMachineTransition_0owmy"), "Pistol-shoot", "Pistol-idle", SubResource("AnimationNodeStateMachineTransition_qek5x"), "Start", "Pistol-idle", SubResource("AnimationNodeStateMachineTransition_5gtgg")]
 
 [node name="Player" type="CharacterBody3D" unique_id=1786887011 node_paths=PackedStringArray("camera")]
 script = ExtResource("1_8afob")
@@ -20,5 +61,52 @@ script = ExtResource("2_dovo2")
 
 [node name="RotX" type="Node3D" parent="RotY" unique_id=1158049050]
 
+[node name="hand" parent="RotY/RotX" unique_id=481747273 instance=ExtResource("3_p47bc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20633817, -0.16909224, -5.9604645e-08)
+
+[node name="Skeleton3D" parent="RotY/RotX/hand/Arm-Armature" parent_id_path=PackedInt32Array(481747273, 674960602) index="0" unique_id=1268595497]
+bones/0/rotation = Quaternion(-0.5, 0.50000006, -0.5, 0.5)
+bones/3/rotation = Quaternion(7.700781e-16, -1.04649094e-16, -0.13465647, 0.99089235)
+bones/4/rotation = Quaternion(0.026809711, -0.017022237, 0.53496635, 0.8442763)
+bones/5/rotation = Quaternion(0.031216707, -0.022076419, -0.16551057, 0.98546666)
+bones/6/rotation = Quaternion(-0.5723358, -0.054645393, -0.072554186, 0.8149734)
+bones/7/rotation = Quaternion(-0.8679884, -0.12654175, 0.06079825, 0.47632664)
+bones/8/rotation = Quaternion(-0.49338496, -0.20599963, -0.3010631, 0.78961784)
+bones/9/rotation = Quaternion(-0.7028759, -0.31664586, 0.2649731, 0.5792151)
+
+[node name="Arm" parent="RotY/RotX/hand/Arm-Armature/Skeleton3D" index="0" unique_id=1504286211]
+surface_material_override/0 = SubResource("ShaderMaterial_qek5x")
+
+[node name="PistolBulletSpawn" type="Node3D" parent="RotY/RotX/hand/Arm-Armature/Skeleton3D/Arm" index="0" unique_id=357589825]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.021836579, -0.57017285)
+
+[node name="PistolBulletTarget" type="Node3D" parent="RotY/RotX/hand/Arm-Armature/Skeleton3D/Arm" index="1" unique_id=224117691]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+
 [node name="Camera3D" type="Camera3D" parent="RotY/RotX" unique_id=695863509]
 current = true
+
+[node name="Reticle" type="TextureRect" parent="." unique_id=1228789165]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("6_75vfm")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=464300849]
+root_node = NodePath("../RotY/RotX/hand")
+tree_root = SubResource("AnimationNodeStateMachine_h17s1")
+anim_player = NodePath("../RotY/RotX/hand/AnimationPlayer")
+
+[connection signal="animation_started" from="AnimationTree" to="." method="_on_animation_tree_animation_started"]
+
+[editable path="RotY/RotX/hand"]
