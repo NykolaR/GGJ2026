@@ -12,7 +12,17 @@ const JUMP_VELOCITY = 4.5
 
 
 func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	$RotY/RotX/hand.look_at($"RotY/RotX/hand/Arm-Armature/Skeleton3D/Arm/PistolBulletTarget".global_position)
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("uncapture_mouse"):
+		match Input.mouse_mode:
+			Input.MOUSE_MODE_CAPTURED:
+				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			Input.MOUSE_MODE_VISIBLE:
+				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
 func _physics_process(delta: float) -> void:
@@ -39,6 +49,7 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed(&"shoot"):
 		animation.start(&"Pistol-shoot")
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	elif Input.is_action_pressed(&"shoot"):
 		animation.travel(&"Pistol-shoot")
 
