@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://d03ii0poyajaw"]
+
+[ext_resource type="Script" uid="uid://cf53kslt6j2ps" path="res://scenes/player/player.gd" id="1_8afob"]
+[ext_resource type="Script" uid="uid://bcvcsmlou8eew" path="res://scenes/player/camera.gd" id="2_dovo2"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_dovo2"]
+radius = 0.2
+
+[node name="Player" type="CharacterBody3D" unique_id=1786887011 node_paths=PackedStringArray("camera")]
+script = ExtResource("1_8afob")
+camera = NodePath("RotY")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=426007301]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("SphereShape3D_dovo2")
+
+[node name="RotY" type="Node3D" parent="." unique_id=1795016514]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5141897, 0)
+script = ExtResource("2_dovo2")
+
+[node name="RotX" type="Node3D" parent="RotY" unique_id=1158049050]
+
+[node name="Camera3D" type="Camera3D" parent="RotY/RotX" unique_id=695863509]
+current = true
