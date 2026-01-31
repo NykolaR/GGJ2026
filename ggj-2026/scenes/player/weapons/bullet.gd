@@ -1,8 +1,10 @@
 extends RayCast3D
 
+const Enemy: GDScript = preload("res://scenes/enemy/enemy.gd")
 
 var target: Vector3 = Vector3.ZERO
 
+@export var damage: int = 1
 @export var spread: float = 0.02
 @export var range: float = 10.0
 
@@ -22,6 +24,9 @@ func _physics_process(_delta: float) -> void:
 	if is_colliding():
 		visual.scale.z = global_position.distance_to(get_collision_point())
 		top_level = true
+		var col: Enemy = get_collider() as Enemy
+		if col:
+			col.hit(1)
 	else:
 		visual.scale.z = range
 	show()

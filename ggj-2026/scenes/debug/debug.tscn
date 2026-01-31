@@ -2,6 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://da11xn34k4j06" path="res://scenes/world/stage.tscn" id="1_fym4n"]
 [ext_resource type="PackedScene" uid="uid://d03ii0poyajaw" path="res://scenes/player/player.tscn" id="2_pa0g8"]
+[ext_resource type="PackedScene" uid="uid://b8kagop8tvnh" path="res://scenes/enemy/enemy.tscn" id="3_pa0g8"]
+[ext_resource type="PackedScene" uid="uid://5qw3bffoese7" path="res://scenes/enemy/spawning_mask/spawning_mask.tscn" id="4_oa6p7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fym4n"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -13,8 +15,6 @@ sky_material = SubResource("ProceduralSkyMaterial_fym4n")
 [sub_resource type="Environment" id="Environment_oa6p7"]
 background_mode = 1
 sky = SubResource("Sky_pa0g8")
-ambient_light_source = 2
-ambient_light_color = Color(0.41568628, 0.015686275, 1, 1)
 tonemap_mode = 2
 glow_enabled = true
 
@@ -22,6 +22,7 @@ glow_enabled = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1637109102]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+visible = false
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=114159800]
@@ -32,3 +33,18 @@ transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 
 [node name="Player" parent="." unique_id=1786887011 instance=ExtResource("2_pa0g8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5098526, 0)
+
+[node name="Enemy" parent="." unique_id=689310269 instance=ExtResource("3_pa0g8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 4, 0)
+
+[node name="Enemy2" parent="." unique_id=1321154890 instance=ExtResource("3_pa0g8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 4, 7)
+
+[node name="Enemy3" parent="." unique_id=18822014 instance=ExtResource("3_pa0g8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 4, -1)
+
+[node name="Enemy4" parent="." unique_id=2016225487 instance=ExtResource("3_pa0g8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 4, -8)
+
+[node name="SpawningMask" parent="." unique_id=877458569 instance=ExtResource("4_oa6p7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 4.4638047, 4)

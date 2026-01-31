@@ -6,7 +6,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m0nke"]
 shader = ExtResource("1_bqseu")
-shader_parameter/color_depth = 16.0
+shader_parameter/color_depth = 24.0
 shader_parameter/dithering_pattern_texture = ExtResource("2_maams")
 
 [node name="Retro" type="Node" unique_id=2027053121]

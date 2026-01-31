@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://sn3sna5uoatn"]
+
+[node name="MaskPiece" type="CollisionShape3D" unique_id=1027750743]
