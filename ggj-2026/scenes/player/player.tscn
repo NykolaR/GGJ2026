@@ -77,6 +77,12 @@ bones/9/rotation = Quaternion(-0.7028759, -0.31664586, 0.2649731, 0.5792151)
 [node name="Arm" parent="RotY/RotX/hand/Arm-Armature/Skeleton3D" index="0" unique_id=1504286211]
 surface_material_override/0 = SubResource("ShaderMaterial_qek5x")
 
+[node name="PistolBulletSpawn" type="Node3D" parent="RotY/RotX/hand/Arm-Armature/Skeleton3D/Arm" index="0" unique_id=357589825]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.021836579, -0.57017285)
+
+[node name="PistolBulletTarget" type="Node3D" parent="RotY/RotX/hand/Arm-Armature/Skeleton3D/Arm" index="1" unique_id=224117691]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+
 [node name="Camera3D" type="Camera3D" parent="RotY/RotX" unique_id=695863509]
 current = true
 
@@ -92,11 +98,15 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("6_75vfm")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=464300849]
 root_node = NodePath("../RotY/RotX/hand")
 tree_root = SubResource("AnimationNodeStateMachine_h17s1")
 anim_player = NodePath("../RotY/RotX/hand/AnimationPlayer")
+
+[connection signal="animation_started" from="AnimationTree" to="." method="_on_animation_tree_animation_started"]
 
 [editable path="RotY/RotX/hand"]

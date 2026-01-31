@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://c3sfbdqudxkf8"]
+
+[ext_resource type="Script" uid="uid://c7b4iwml5rxei" path="res://scenes/player/weapons/bullet.gd" id="1_fvo7p"]
+[ext_resource type="PackedScene" uid="uid://dw03c0f3pvg7x" path="res://assets/models/pipe.gltf" id="2_q7tbw"]
+[ext_resource type="Shader" uid="uid://cqjr2e4gs6kvq" path="res://ursc/spatial/basic/basic_transparent.gdshader" id="3_rf2fw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cc0p6"]
+render_priority = 0
+shader = ExtResource("3_rf2fw")
+shader_parameter/albedo_color = Color(1, 1, 1, 0.078431375)
+shader_parameter/cull_distance_override = 0.0
+shader_parameter/convert_vertex_colors = false
+
+[node name="Bullet" type="RayCast3D" unique_id=132572255]
+target_position = Vector3(0, 0, -1)
+debug_shape_thickness = 1
+script = ExtResource("1_fvo7p")
+
+[node name="Visual" type="Node3D" parent="." unique_id=636993632]
+
+[node name="pipe" parent="Visual" unique_id=1317619610 instance=ExtResource("2_q7tbw")]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 0, -0.5)
+
+[node name="Cylinder" parent="Visual/pipe" index="0" unique_id=808322116]
+surface_material_override/0 = SubResource("ShaderMaterial_cc0p6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1267605123]
+material_override = SubResource("ShaderMaterial_cc0p6")
+
+[editable path="Visual/pipe"]
