@@ -6,6 +6,39 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_6qxeq"]
 radius = 0.2
 
+[sub_resource type="QuadMesh" id="QuadMesh_6qxeq"]
+size = Vector2(3, 3)
+
+[sub_resource type="Gradient" id="Gradient_gmljo"]
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0, 0.3443396, 1)
+colors = PackedColorArray(1, 1, 1, 0.8352941, 1, 1, 1, 0.12156863, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1e33p"]
+gradient = SubResource("Gradient_gmljo")
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_40gsk"]
+transparency = 1
+shading_mode = 2
+albedo_color = Color(5.912981, 0.63325053, 0, 1)
+albedo_texture = SubResource("GradientTexture2D_1e33p")
+emission = Color(2.4907243, 0.15748014, 0, 1)
+emission_energy_multiplier = 6.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rbih0"]
+transparency = 1
+shading_mode = 2
+albedo_color = Color(5.912981, 0.63325053, 0, 1)
+albedo_texture = SubResource("GradientTexture2D_1e33p")
+emission_enabled = true
+emission = Color(2.4907243, 0.15748014, 0, 1)
+emission_energy_multiplier = 6.0
+
 [node name="ChasingEnemy" unique_id=689310269 instance=ExtResource("1_t7t1x")]
 script = ExtResource("2_6qxeq")
 speed = 0.05
@@ -14,5 +47,15 @@ health = 2
 
 [node name="CollisionShape3D" parent="." index="0" unique_id=1436251806]
 shape = SubResource("SphereShape3D_6qxeq")
+
+[node name="Glow" type="MeshInstance3D" parent="." index="2" unique_id=2060671529]
+transform = Transform3D(-0.2, 0, -3.019916e-08, 0, 0.2, 0, 3.019916e-08, 0, -0.2, 0, 0, 0.2960505)
+mesh = SubResource("QuadMesh_6qxeq")
+surface_material_override/0 = SubResource("StandardMaterial3D_40gsk")
+
+[node name="Glow2" type="MeshInstance3D" parent="Glow" index="0" unique_id=339762511]
+transform = Transform3D(0.3, 0, 1.907191e-08, 0, 0.3, 0, -1.907191e-08, 0, 0.3, 3.3546579e-09, 0, 0.052768596)
+mesh = SubResource("QuadMesh_6qxeq")
+surface_material_override/0 = SubResource("StandardMaterial3D_rbih0")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

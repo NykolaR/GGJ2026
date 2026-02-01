@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b8kagop8tvnh"]
 
 [ext_resource type="Script" uid="uid://dhije8l7d3s6u" path="res://scenes/enemy/enemy.gd" id="1_4a83h"]
+[ext_resource type="AudioStream" uid="uid://ccgyjpmkos5wy" path="res://assets/audio/sfx/hit1.wav" id="2_a3pup"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_883im"]
 radius = 1.0
@@ -13,3 +14,6 @@ script = ExtResource("1_4a83h")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1436251806]
 shape = SubResource("SphereShape3D_883im")
 debug_color = Color(0.9934134, 0, 0.24475053, 0.41960785)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=364109183]
+stream = ExtResource("2_a3pup")

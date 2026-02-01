@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://cmih2cv56laqg" path="res://assets/textures/arm.png" id="5_0owmy"]
 [ext_resource type="Texture2D" uid="uid://d3xymnflgx3t4" path="res://assets/textures/mask.png" id="6_75vfm"]
 [ext_resource type="PackedScene" uid="uid://0lx0t2gql54d" path="res://assets/models/skull-shape.glb" id="7_0owmy"]
+[ext_resource type="AudioStream" uid="uid://mlvieo3rnsa1" path="res://assets/audio/sfx/shoot1.wav" id="8_5gtgg"]
+[ext_resource type="AudioStream" uid="uid://blfiflqxecg41" path="res://assets/audio/sfx/shoot2.wav" id="9_h17s1"]
+[ext_resource type="AudioStream" uid="uid://xdf31imlwr35" path="res://assets/audio/sfx/hurt1.wav" id="10_h17s1"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_dovo2"]
 radius = 0.2
@@ -116,7 +119,7 @@ script = ExtResource("2_dovo2")
 [node name="hand" parent="RotY/RotX" unique_id=431467505 instance=ExtResource("3_p47bc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20633817, -0.16909224, -5.9604645e-08)
 
-[node name="Skeleton3D" parent="RotY/RotX/hand/Arm-Armature" parent_id_path=PackedInt32Array(431467505, 1966625578) index="0" unique_id=1798349971]
+[node name="Skeleton3D" parent="RotY/RotX/hand/Arm-Armature" parent_id_path=PackedInt32Array(431467505, 718796287) index="0" unique_id=282466003]
 bones/0/rotation = Quaternion(-0.7071068, 0, 0, 0.7071068)
 bones/1/rotation = Quaternion(-0.5646381, -0.024727734, -0.0163793, 0.8248055)
 bones/2/rotation = Quaternion(-0.06566717, 0.002948672, 0.16091341, 0.9847772)
@@ -128,7 +131,7 @@ bones/7/rotation = Quaternion(-0.0948732, -0.025789909, 0.0858471, 0.9914456)
 bones/8/rotation = Quaternion(-0.057419002, -0.03199888, -0.38058823, 0.9224055)
 bones/9/rotation = Quaternion(-0.080858044, -0.05592866, 0.3604001, 0.92760223)
 
-[node name="Arm" parent="RotY/RotX/hand/Arm-Armature/Skeleton3D" index="0" unique_id=1046258405]
+[node name="Arm" parent="RotY/RotX/hand/Arm-Armature/Skeleton3D" index="0" unique_id=1305126404]
 surface_material_override/0 = SubResource("ShaderMaterial_qek5x")
 
 [node name="PistolBulletSpawn" type="Node3D" parent="RotY/RotX/hand/Arm-Armature/Skeleton3D/Arm" index="0" unique_id=357589825]
@@ -230,19 +233,19 @@ render_target_update_mode = 4
 [node name="skull-shape" parent="FaceCam" unique_id=129449758 instance=ExtResource("7_0owmy")]
 transform = Transform3D(-0.1755249, 0.02842266, -0.16119292, 0, 0.23635384, 0.04167556, 0.16367957, 0.030479578, -0.17285828, -0.215, 0, 0)
 
-[node name="skull" parent="FaceCam/skull-shape" index="0" unique_id=997162738]
+[node name="skull" parent="FaceCam/skull-shape" index="0" unique_id=629711785]
 surface_material_override/0 = SubResource("ShaderMaterial_qek5x")
 
-[node name="butterfly" parent="FaceCam/skull-shape" index="1" unique_id=1927503407]
+[node name="butterfly" parent="FaceCam/skull-shape" index="1" unique_id=1667695486]
 visible = false
 
-[node name="diamond" parent="FaceCam/skull-shape" index="2" unique_id=1220867083]
+[node name="diamond" parent="FaceCam/skull-shape" index="2" unique_id=1845575968]
 visible = false
 
-[node name="goblin" parent="FaceCam/skull-shape" index="3" unique_id=480152809]
+[node name="goblin" parent="FaceCam/skull-shape" index="3" unique_id=2004059502]
 visible = false
 
-[node name="heart" parent="FaceCam/skull-shape" index="4" unique_id=1836896208]
+[node name="heart" parent="FaceCam/skull-shape" index="4" unique_id=2034789523]
 visible = false
 
 [node name="Camera3D" type="Camera3D" parent="FaceCam" unique_id=699761584]
@@ -262,6 +265,21 @@ offset_top = -40.0
 offset_right = 40.0
 grow_vertical = 0
 texture = SubResource("ViewportTexture_h17s1")
+
+[node name="Shoot" type="AudioStreamPlayer3D" parent="." unique_id=1004845543]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5064018, 0)
+stream = ExtResource("8_5gtgg")
+
+[node name="Shoot2" type="AudioStreamPlayer3D" parent="." unique_id=752488245]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5064018, 0)
+stream = ExtResource("9_h17s1")
+
+[node name="Hurt" type="AudioStreamPlayer3D" parent="." unique_id=5334337]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5064018, 0)
+stream = ExtResource("10_h17s1")
 
 [connection signal="animation_started" from="AnimationTree" to="." method="_on_animation_tree_animation_started"]
 [connection signal="body_entered" from="Mask" to="." method="_on_mask_body_entered"]

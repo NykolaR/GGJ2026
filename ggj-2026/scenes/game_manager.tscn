@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dgdyc0n7bgbsk"]
 
 [ext_resource type="Script" uid="uid://bi6amp0uwy2li" path="res://scenes/game_manager.gd" id="1_hwd4i"]
+[ext_resource type="AudioStream" uid="uid://tlpwwaq6c5ry" path="res://assets/audio/sfx/death.wav" id="2_glms7"]
 
 [node name="GameManager" type="Node" unique_id=942270679]
 script = ExtResource("1_hwd4i")
@@ -10,3 +11,6 @@ offset_right = 40.0
 offset_bottom = 23.0
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1742719383]
+stream = ExtResource("2_glms7")

@@ -2,9 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://da11xn34k4j06" path="res://scenes/world/stage.tscn" id="1_fym4n"]
 [ext_resource type="PackedScene" uid="uid://dgdyc0n7bgbsk" path="res://scenes/game_manager.tscn" id="1_hxnlu"]
+[ext_resource type="Script" uid="uid://dttrhhfup0a8d" path="res://scenes/debug/debug.gd" id="1_v5q7w"]
 [ext_resource type="PackedScene" uid="uid://d03ii0poyajaw" path="res://scenes/player/player.tscn" id="2_pa0g8"]
 [ext_resource type="PackedScene" uid="uid://b7akgn8qr8qh2" path="res://scenes/enemy/mask_spawner_spawner.tscn" id="4_hxnlu"]
 [ext_resource type="PackedScene" uid="uid://5qw3bffoese7" path="res://scenes/enemy/spawning_mask/spawning_mask.tscn" id="4_oa6p7"]
+[ext_resource type="AudioStream" uid="uid://br3jk08newohy" path="res://assets/audio/spooky.wav" id="6_2yohk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fym4n"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -16,12 +18,14 @@ sky_material = SubResource("ProceduralSkyMaterial_fym4n")
 [sub_resource type="Environment" id="Environment_oa6p7"]
 background_mode = 1
 sky = SubResource("Sky_hxnlu")
+ambient_light_source = 2
 tonemap_mode = 2
 glow_enabled = true
 fog_enabled = true
 fog_light_color = Color(0, 0, 0, 1)
 
 [node name="Debug" type="Node3D" unique_id=1680230417]
+script = ExtResource("1_v5q7w")
 
 [node name="GameManager" parent="." unique_id=942270679 instance=ExtResource("1_hxnlu")]
 
@@ -57,6 +61,12 @@ spot_angle = 20.0
 
 [node name="MaskSpawnerSpawner" parent="." unique_id=1275169239 instance=ExtResource("4_hxnlu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1928223030]
+stream = ExtResource("6_2yohk")
+volume_db = -3.0
+pitch_scale = 0.55
+autoplay = true
 
 [connection signal="tree_exiting" from="Player" to="GameManager" method="gameover"]
 [connection signal="mask_grabbed" from="SpawningMask/Mask" to="SpawningMask" method="queue_free"]

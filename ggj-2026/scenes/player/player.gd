@@ -95,7 +95,9 @@ func _physics_process(delta: float) -> void:
 			$"FaceCam/skull-shape/skull".set_blend_shape_value(2, fuse_percent)
 		"goblin":
 			$"FaceCam/skull-shape/skull".set_blend_shape_value(3, fuse_percent)
-		
+	
+	if global_position.y < -3:
+		queue_free()
 
 
 func _on_animation_tree_animation_started(anim_name: StringName) -> void:
@@ -105,6 +107,7 @@ func _on_animation_tree_animation_started(anim_name: StringName) -> void:
 			b.damage = baked_gun_level + 1
 			b.target = $"RotY/RotX/hand/Arm-Armature/Skeleton3D/Arm/PistolBulletTarget".global_position
 			pistol_bullet_spawn.add_child(b)
+			%Shoot.play()
 		&"Shotgun-shoot":
 			for i in (baked_gun_level + 2):
 				for sg in sgbs:
@@ -114,6 +117,7 @@ func _on_animation_tree_animation_started(anim_name: StringName) -> void:
 					b.speed = 0.4
 					b.spread = 0.15
 					sg.add_child(b)
+			%Shoot2.play()
 		&"MachineShoot":
 			var b: BulletMotion = BULLET_MOTION.instantiate()
 			b.damage = baked_gun_level + 1
@@ -121,6 +125,7 @@ func _on_animation_tree_animation_started(anim_name: StringName) -> void:
 			b.spread = 0.03
 			pistol_bullet_spawn.add_child(b)
 			$RotY._last_mouse_motion += Vector2(randf_range(-5, 5), randf_range(-7, -1))
+			%Shoot.play()
 
 
 func set_gun(new: Helper.GUNS) -> void:
@@ -170,11 +175,19 @@ func add_mask(mask: String) -> void:
 		fusing_mask = mask
 		fuse_percent = 0.0
 
+
 func fuse_mask() -> void:
 	pass
 
 
+var ht: Tween
 func set_health(new: int) -> void:
 	health = new
+	%Hurt.play()
+	if ht:
+		ht.kill()
+	ht = create_tween()
+	$FaceCam/OmniLight3D.light_color = Color.RED
+	ht.tween_property($FaceCam/OmniLight3D, "light_color", Color.WHITE, 0.2)
 	if health <= 0:
 		queue_free()

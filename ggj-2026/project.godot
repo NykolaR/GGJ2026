@@ -99,6 +99,7 @@ uncapture_mouse={
 
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="mobile"
+environment/defaults/default_clear_color=Color(0.011087573, 0.011087581, 0.01108758, 1)
 
 [shader_globals]
 

@@ -4,6 +4,7 @@ const MASKSPAWNER: PackedScene = preload("res://scenes/enemy/spawning_mask/spawn
 var mask_spawner_count: int = 2
 
 func start() -> void:
+	spawn_spawner()
 	_on_timer_timeout()
 	$Timer.start()
 

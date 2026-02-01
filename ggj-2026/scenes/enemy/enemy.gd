@@ -4,6 +4,7 @@ extends Area3D
 
 
 func hit(damage: int = 1) -> void:
+	$AudioStreamPlayer3D.play()
 	health -= maxi(damage, 1)
 	if health <= 0:
 		death()
