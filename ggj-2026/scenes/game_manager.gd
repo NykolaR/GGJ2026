@@ -9,6 +9,8 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if not is_inside_tree():
+		return
 	if event.is_action_pressed("action"):
 		get_viewport().set_input_as_handled()
 		get_tree().reload_current_scene()

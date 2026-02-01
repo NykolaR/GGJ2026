@@ -4,6 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://tlpwwaq6c5ry" path="res://assets/audio/sfx/death.wav" id="2_glms7"]
 
 [node name="GameManager" type="Node" unique_id=942270679]
+process_mode = 3
 script = ExtResource("1_hwd4i")
 
 [node name="GameOver" type="Label" parent="." unique_id=1399074919]
