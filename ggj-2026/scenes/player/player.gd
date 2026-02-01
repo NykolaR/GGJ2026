@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+const Mask: GDScript = preload("res://scenes/mask/mask.gd")
+
 const BULLET: PackedScene = preload("res://scenes/player/weapons/bullet.tscn")
 const Bullet: GDScript = preload("res://scenes/player/weapons/bullet.gd")
 const BULLET_MOTION: PackedScene = preload("res://scenes/player/weapons/bullet_motion.tscn")
@@ -7,6 +9,8 @@ const BulletMotion: GDScript = preload("res://scenes/player/weapons/bullet_motio
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
+
+var health: int = 10
 
 var baked_gun: Helper.GUNS = Helper.GUNS.NONE
 var baked_gun_level: int = 0
@@ -91,6 +95,10 @@ func _on_animation_tree_animation_started(anim_name: StringName) -> void:
 
 
 func set_gun(new: Helper.GUNS) -> void:
+	if gun == Helper.GUNS.NONE and not new == Helper.GUNS.NONE:
+		var tween: Tween = create_tween()
+		tween.tween_property($OmniLight3D, "light_energy", 1.0, 1.0)
+	
 	gun = new
 	if gun == Helper.GUNS.HARPOON:
 		gun = Helper.GUNS.PISTOL
@@ -103,3 +111,10 @@ func set_gun(new: Helper.GUNS) -> void:
 			animation.start(&"Machine-idle")
 		Helper.GUNS.SHOTGUN:
 			animation.start(&"Shotgun-idle")
+
+
+func _on_mask_body_entered(body: Node3D) -> void:
+	if body is Mask:
+		gun = body.base.type
+		body.pick_up_mask()
+		body.queue_free()

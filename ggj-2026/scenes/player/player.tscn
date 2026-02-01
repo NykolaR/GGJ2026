@@ -86,6 +86,9 @@ states/Start/position = Vector2(198.33984, 100)
 transitions = ["Pistol-idle", "Pistol-shoot", SubResource("AnimationNodeStateMachineTransition_0owmy"), "Pistol-shoot", "Pistol-idle", SubResource("AnimationNodeStateMachineTransition_qek5x"), "Start", "Rest", SubResource("AnimationNodeStateMachineTransition_fm80t"), "Machine-idle", "MachineShoot", SubResource("AnimationNodeStateMachineTransition_gx1jg"), "MachineShoot", "Machine-idle", SubResource("AnimationNodeStateMachineTransition_ugbui"), "Shotgun-idle", "Shotgun-shoot", SubResource("AnimationNodeStateMachineTransition_fcs02"), "Shotgun-shoot", "Shotgun-idle", SubResource("AnimationNodeStateMachineTransition_myrg7")]
 graph_offset = Vector2(110, 19)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_75vfm"]
+radius = 0.15
+
 [node name="Player" type="CharacterBody3D" unique_id=1786887011 node_paths=PackedStringArray("camera")]
 collision_layer = 2
 script = ExtResource("1_8afob")
@@ -195,9 +198,20 @@ anim_player = NodePath("../RotY/RotX/hand/AnimationPlayer")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1674696348]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+light_energy = 0.0
 light_volumetric_fog_energy = 0.0
 omni_range = 15.0
 
+[node name="Mask" type="Area3D" parent="." unique_id=1177285077]
+collision_layer = 0
+collision_mask = 8
+input_ray_pickable = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mask" unique_id=615846680]
+shape = SubResource("SphereShape3D_75vfm")
+
 [connection signal="animation_started" from="AnimationTree" to="." method="_on_animation_tree_animation_started"]
+[connection signal="body_entered" from="Mask" to="." method="_on_mask_body_entered"]
 
 [editable path="RotY/RotX/hand"]
