@@ -11,4 +11,17 @@ script = ExtResource("2_1e33p")
 visible = false
 
 [node name="Mask" parent="." index="2" unique_id=1479358489 instance=ExtResource("2_rv0x0")]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+
+[node name="SpawnTimer" type="Timer" parent="." index="3" unique_id=1023725440]
+wait_time = 10.0
+autostart = true
+
+[node name="RespawnTimer" type="Timer" parent="." index="4" unique_id=630186002]
+wait_time = 30.0
+one_shot = true
+
+[node name="SpawnTransform" type="Node3D" parent="." index="5" unique_id=2056215839]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0.18825945)
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]

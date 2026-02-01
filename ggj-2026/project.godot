@@ -16,6 +16,10 @@ run/main_scene="uid://bqj60x1nsw1w0"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Helper="*uid://crpis0n8ou22"
+
 [input]
 
 action={
