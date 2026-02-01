@@ -70,7 +70,7 @@ func _physics_process(delta: float) -> void:
 			if Input.is_action_pressed(&"shoot"):
 				animation.travel(&"MachineShoot")
 
-	fuse_percent += 0.001
+	fuse_percent += 0.0005
 	
 	if fuse_percent >= 1.0:
 		fuse_percent = 1.0

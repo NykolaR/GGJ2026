@@ -19,5 +19,5 @@ func _on_timer_timeout() -> void:
 
 func spawn_spawner() -> void:
 	var ns: Node3D = MASKSPAWNER.instantiate()
-	ns.position = (Vector3.FORWARD * 13).rotated(Vector3.UP, randf() * PI * 2.0)
+	ns.position = (Vector3.FORWARD * randf() * 13).rotated(Vector3.UP, randf() * PI * 2.0)
 	add_child(ns)
