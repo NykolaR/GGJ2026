@@ -8,8 +8,8 @@ radius = 0.2
 
 [node name="ChasingEnemy" unique_id=689310269 instance=ExtResource("1_t7t1x")]
 script = ExtResource("2_6qxeq")
-speed = 0.04
-steer_speed = 0.03
+speed = 0.05
+steer_speed = 0.04
 health = 2
 
 [node name="CollisionShape3D" parent="." index="0" unique_id=1436251806]
