@@ -107,10 +107,13 @@ func set_gun(new: Helper.GUNS) -> void:
 			animation.start(&"Rest")
 		Helper.GUNS.PISTOL:
 			animation.start(&"Pistol-idle")
+			$"FaceCam/skull-shape/heart".show()
 		Helper.GUNS.MACHINE:
 			animation.start(&"Machine-idle")
+			$"FaceCam/skull-shape/goblin".show()
 		Helper.GUNS.SHOTGUN:
 			animation.start(&"Shotgun-idle")
+			$"FaceCam/skull-shape/butterfly".show()
 
 
 func _on_mask_body_entered(body: Node3D) -> void:
