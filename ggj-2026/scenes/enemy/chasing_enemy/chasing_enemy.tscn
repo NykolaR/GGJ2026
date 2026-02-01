@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bu5j2nxm3u2i6" path="res://scenes/enemy/chasing_enemy/chasing_enemy.gd" id="2_6qxeq"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6qxeq"]
-radius = 0.2
+radius = 0.3
 
 [sub_resource type="QuadMesh" id="QuadMesh_6qxeq"]
 size = Vector2(3, 3)
@@ -24,6 +24,7 @@ metadata/_snap_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_40gsk"]
 transparency = 1
+cull_mode = 2
 shading_mode = 2
 albedo_color = Color(5.912981, 0.63325053, 0, 1)
 albedo_texture = SubResource("GradientTexture2D_1e33p")
@@ -32,6 +33,7 @@ emission_energy_multiplier = 6.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rbih0"]
 transparency = 1
+cull_mode = 2
 shading_mode = 2
 albedo_color = Color(5.912981, 0.63325053, 0, 1)
 albedo_texture = SubResource("GradientTexture2D_1e33p")

@@ -23,5 +23,6 @@ func gameover() -> void:
 	$AudioStreamPlayer.play()
 	set_physics_process(false)
 	$GameOver.text = "YOU HAVE PERISHED\n\n"
-	$GameOver.text += "YOU SURVIVED " + str(survived_frames / 60.0) + " SECONDS"
+	var ns: String = "%5.2f" % (survived_frames / 60.0)
+	$GameOver.text += "YOU SURVIVED " + ns + " SECONDS"
 	set_process_input(true)

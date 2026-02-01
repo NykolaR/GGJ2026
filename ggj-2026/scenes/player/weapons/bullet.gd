@@ -9,7 +9,7 @@ var target: Vector3 = Vector3.ZERO
 @export var bullet_range: float = 10.0
 
 @onready var visual: Node3D = $Visual as Node3D
-
+var f1: bool = true
 
 func _ready() -> void:
 	target_position = Vector3(0, 0, -bullet_range)
@@ -20,6 +20,9 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	if f1:
+		f1 = false
+		return
 	force_raycast_update()
 	visual.scale.z = bullet_range
 	if is_colliding():
