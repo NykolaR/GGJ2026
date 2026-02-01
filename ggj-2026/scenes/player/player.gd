@@ -10,7 +10,7 @@ const BulletMotion: GDScript = preload("res://scenes/player/weapons/bullet_motio
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
-var health: int = 10
+var health: int = 10: set = set_health
 
 var baked_gun: Helper.GUNS = Helper.GUNS.NONE
 var baked_gun_level: int = 0
@@ -118,3 +118,13 @@ func _on_mask_body_entered(body: Node3D) -> void:
 		gun = body.base.type
 		body.pick_up_mask()
 		body.queue_free()
+
+
+func fuse_mask() -> void:
+	pass
+
+
+func set_health(new: int) -> void:
+	health = new
+	if health <= 0:
+		queue_free()

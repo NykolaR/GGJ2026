@@ -12,3 +12,5 @@ health = 2
 
 [node name="MaskBaseHeart" parent="." index="1" unique_id=1027750743 instance=ExtResource("3_gmljo")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

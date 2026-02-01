@@ -1,5 +1,7 @@
 extends "res://scenes/enemy/enemy.gd"
 
+const Player: GDScript = preload("res://scenes/player/player.gd")
+
 @export var speed: float = 0.04
 @export var steer_speed: float = 0.03
 
@@ -12,3 +14,9 @@ func _physics_process(_delta: float) -> void:
 		global_basis = global_basis.slerp(nt.basis, rate)
 	
 	global_position += global_basis.z * -speed
+
+
+func _on_body_entered(body: Node3D) -> void:
+	if body is Player:
+		body.health -= 1
+		death()

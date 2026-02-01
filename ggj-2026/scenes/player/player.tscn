@@ -6,6 +6,7 @@
 [ext_resource type="Shader" uid="uid://bf64br441qj8r" path="res://ursc/spatial/standard/standard_opaque.gdshader" id="4_75vfm"]
 [ext_resource type="Texture2D" uid="uid://cmih2cv56laqg" path="res://assets/textures/arm.png" id="5_0owmy"]
 [ext_resource type="Texture2D" uid="uid://d3xymnflgx3t4" path="res://assets/textures/mask.png" id="6_75vfm"]
+[ext_resource type="PackedScene" uid="uid://0lx0t2gql54d" path="res://assets/models/skull-shape.glb" id="7_0owmy"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_dovo2"]
 radius = 0.2
@@ -89,6 +90,14 @@ graph_offset = Vector2(110, 19)
 [sub_resource type="SphereShape3D" id="SphereShape3D_75vfm"]
 radius = 0.15
 
+[sub_resource type="Environment" id="Environment_qek5x"]
+
+[sub_resource type="World3D" id="World3D_5gtgg"]
+environment = SubResource("Environment_qek5x")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_h17s1"]
+viewport_path = NodePath("FaceCam")
+
 [node name="Player" type="CharacterBody3D" unique_id=1786887011 node_paths=PackedStringArray("camera")]
 collision_layer = 2
 script = ExtResource("1_8afob")
@@ -107,7 +116,7 @@ script = ExtResource("2_dovo2")
 [node name="hand" parent="RotY/RotX" unique_id=431467505 instance=ExtResource("3_p47bc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20633817, -0.16909224, -5.9604645e-08)
 
-[node name="Skeleton3D" parent="RotY/RotX/hand/Arm-Armature" parent_id_path=PackedInt32Array(431467505, 1358882398) index="0" unique_id=1980827285]
+[node name="Skeleton3D" parent="RotY/RotX/hand/Arm-Armature" parent_id_path=PackedInt32Array(431467505, 718796287) index="0" unique_id=282466003]
 bones/0/rotation = Quaternion(-0.7071068, 0, 0, 0.7071068)
 bones/1/rotation = Quaternion(-0.5646381, -0.024727734, -0.0163793, 0.8248055)
 bones/2/rotation = Quaternion(-0.06566717, 0.002948672, 0.16091341, 0.9847772)
@@ -119,7 +128,7 @@ bones/7/rotation = Quaternion(-0.0948732, -0.025789909, 0.0858471, 0.9914456)
 bones/8/rotation = Quaternion(-0.057419002, -0.03199888, -0.38058823, 0.9224055)
 bones/9/rotation = Quaternion(-0.080858044, -0.05592866, 0.3604001, 0.92760223)
 
-[node name="Arm" parent="RotY/RotX/hand/Arm-Armature/Skeleton3D" index="0" unique_id=2114118338]
+[node name="Arm" parent="RotY/RotX/hand/Arm-Armature/Skeleton3D" index="0" unique_id=1305126404]
 surface_material_override/0 = SubResource("ShaderMaterial_qek5x")
 
 [node name="PistolBulletSpawn" type="Node3D" parent="RotY/RotX/hand/Arm-Armature/Skeleton3D/Arm" index="0" unique_id=357589825]
@@ -211,7 +220,51 @@ monitorable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Mask" unique_id=615846680]
 shape = SubResource("SphereShape3D_75vfm")
 
+[node name="FaceCam" type="SubViewport" parent="." unique_id=1775839532]
+own_world_3d = true
+world_3d = SubResource("World3D_5gtgg")
+transparent_bg = true
+size = Vector2i(64, 64)
+render_target_update_mode = 4
+
+[node name="skull-shape" parent="FaceCam" unique_id=847401797 instance=ExtResource("7_0owmy")]
+transform = Transform3D(-0.1755249, 0.02842266, -0.16119292, 0, 0.23635384, 0.04167556, 0.16367957, 0.030479578, -0.17285828, -0.215, 0, 0)
+
+[node name="skull" parent="FaceCam/skull-shape" index="0" unique_id=2117386205]
+surface_material_override/0 = SubResource("ShaderMaterial_qek5x")
+
+[node name="butterfly" parent="FaceCam/skull-shape" index="1" unique_id=455940853]
+visible = false
+
+[node name="diamond" parent="FaceCam/skull-shape" index="2" unique_id=1858517324]
+visible = false
+
+[node name="goblin" parent="FaceCam/skull-shape" index="3" unique_id=1381764267]
+visible = false
+
+[node name="heart" parent="FaceCam/skull-shape" index="4" unique_id=530190701]
+visible = false
+
+[node name="Camera3D" type="Camera3D" parent="FaceCam" unique_id=699761584]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.135, 0, 1.15)
+fov = 40.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="FaceCam" unique_id=1665919593]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.155, 0, 0.33)
+omni_attenuation = 0.495
+
+[node name="FaceCamVP" type="TextureRect" parent="." unique_id=892728549]
+texture_filter = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+texture = SubResource("ViewportTexture_h17s1")
+
 [connection signal="animation_started" from="AnimationTree" to="." method="_on_animation_tree_animation_started"]
 [connection signal="body_entered" from="Mask" to="." method="_on_mask_body_entered"]
 
 [editable path="RotY/RotX/hand"]
+[editable path="FaceCam/skull-shape"]
