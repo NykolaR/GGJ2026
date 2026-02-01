@@ -1,0 +1,16 @@
+extends Node
+
+var mask_bases: Array[PackedScene] = [
+	preload("res://scenes/enemy/spawning_mask/bases/mask_base_heart.tscn")
+]
+
+var player: Node3D
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("uncapture_mouse"):
+		match Input.mouse_mode:
+			Input.MOUSE_MODE_CAPTURED:
+				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			Input.MOUSE_MODE_VISIBLE:
+				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

@@ -4,19 +4,22 @@
 [ext_resource type="PackedScene" uid="uid://d03ii0poyajaw" path="res://scenes/player/player.tscn" id="2_pa0g8"]
 [ext_resource type="PackedScene" uid="uid://b8kagop8tvnh" path="res://scenes/enemy/enemy.tscn" id="3_pa0g8"]
 [ext_resource type="PackedScene" uid="uid://5qw3bffoese7" path="res://scenes/enemy/spawning_mask/spawning_mask.tscn" id="4_oa6p7"]
+[ext_resource type="PackedScene" uid="uid://m5b5u7ud6lcs" path="res://scenes/enemy/chasing_enemy/chasing_enemy.tscn" id="5_hxnlu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fym4n"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 
-[sub_resource type="Sky" id="Sky_pa0g8"]
+[sub_resource type="Sky" id="Sky_hxnlu"]
 sky_material = SubResource("ProceduralSkyMaterial_fym4n")
 
 [sub_resource type="Environment" id="Environment_oa6p7"]
 background_mode = 1
-sky = SubResource("Sky_pa0g8")
+sky = SubResource("Sky_hxnlu")
 tonemap_mode = 2
 glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0, 0, 0, 1)
 
 [node name="Debug" type="Node3D" unique_id=1680230417]
 
@@ -48,3 +51,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 4, -8)
 
 [node name="SpawningMask" parent="." unique_id=877458569 instance=ExtResource("4_oa6p7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 4.4638047, 4)
+
+[node name="ChasingEnemy" parent="." unique_id=639755744 instance=ExtResource("5_hxnlu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 9)

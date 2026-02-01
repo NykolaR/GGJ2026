@@ -4,6 +4,30 @@
 [ext_resource type="Script" uid="uid://dr23ao3omf5s8" path="res://scenes/enemy/spawning_mask/spawning_mask.gd" id="2_1e33p"]
 [ext_resource type="PackedScene" uid="uid://e56j2frq2wsf" path="res://scenes/mask/mask.tscn" id="2_rv0x0"]
 
+[sub_resource type="QuadMesh" id="QuadMesh_rv0x0"]
+size = Vector2(3, 3)
+
+[sub_resource type="Gradient" id="Gradient_rv0x0"]
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0, 0.3443396, 1)
+colors = PackedColorArray(1, 1, 1, 0.8352941, 1, 1, 1, 0.12156863, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1e33p"]
+gradient = SubResource("Gradient_rv0x0")
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6i54l"]
+transparency = 1
+shading_mode = 2
+albedo_color = Color(5.912981, 0.63325053, 0, 1)
+albedo_texture = SubResource("GradientTexture2D_1e33p")
+emission = Color(2.4907243, 0.15748014, 0, 1)
+emission_energy_multiplier = 6.0
+
 [node name="SpawningMask" unique_id=689310269 instance=ExtResource("1_2mpkn")]
 script = ExtResource("2_1e33p")
 
@@ -11,4 +35,22 @@ script = ExtResource("2_1e33p")
 visible = false
 
 [node name="Mask" parent="." index="2" unique_id=1479358489 instance=ExtResource("2_rv0x0")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="SpawnTimer" type="Timer" parent="." index="3" unique_id=1023725440]
+wait_time = 10.0
+autostart = true
+
+[node name="RespawnTimer" type="Timer" parent="." index="4" unique_id=630186002]
+wait_time = 30.0
+one_shot = true
+
+[node name="SpawnTransform" type="Node3D" parent="." index="5" unique_id=2056215839]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0.18825945)
+
+[node name="Glow" type="MeshInstance3D" parent="." index="6" unique_id=482499711]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0.51771086)
+mesh = SubResource("QuadMesh_rv0x0")
+surface_material_override/0 = SubResource("StandardMaterial3D_6i54l")
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]

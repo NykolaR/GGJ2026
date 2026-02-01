@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://m5b5u7ud6lcs"]
+
+[ext_resource type="PackedScene" uid="uid://b8kagop8tvnh" path="res://scenes/enemy/enemy.tscn" id="1_t7t1x"]
+[ext_resource type="Script" uid="uid://bu5j2nxm3u2i6" path="res://scenes/enemy/chasing_enemy/chasing_enemy.gd" id="2_6qxeq"]
+[ext_resource type="PackedScene" uid="uid://1b6wiypokfwr" path="res://scenes/enemy/spawning_mask/bases/mask_base_heart.tscn" id="3_gmljo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gmljo"]
+emission_enabled = true
+emission = Color(1, 0, 1, 1)
+
+[node name="ChasingEnemy" unique_id=689310269 instance=ExtResource("1_t7t1x")]
+script = ExtResource("2_6qxeq")
+speed = 0.13
+steer_speed = 0.08
+health = 2
+
+[node name="MeshInstance3D" parent="." index="1" unique_id=1925874497]
+visible = false
+surface_material_override/0 = SubResource("StandardMaterial3D_gmljo")
+
+[node name="MaskBaseHeart" parent="." index="2" unique_id=1027750743 instance=ExtResource("3_gmljo")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)

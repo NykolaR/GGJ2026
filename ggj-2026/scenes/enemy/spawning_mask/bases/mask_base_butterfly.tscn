@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://cnwo5cxm8quu7"]
+
+[ext_resource type="PackedScene" uid="uid://sn3sna5uoatn" path="res://scenes/enemy/spawning_mask/mask_piece.tscn" id="1_110h2"]
+[ext_resource type="PackedScene" uid="uid://cp3qgr11jioh4" path="res://assets/models/masks/base/enemy-mask-butterfly.gltf" id="3_110h2"]
+[ext_resource type="Shader" uid="uid://deoh6ruh3calf" path="res://ursc/spatial/shiny/shiny_opaque.gdshader" id="3_gbf2n"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_110h2"]
+points = PackedVector3Array(1.2830193, 0.43877125, 0.05249982, 1.3038527, 0.44593272, -0.02768889, -1.3039985, 0.4459828, -0.02768889, 0.81682456, -0.43223947, -0.1566984, 0.81682456, -0.43223947, 0.1443238, -1.2898932, 0.42770612, 0.1443238, -1.2898932, 0.42770612, -0.1566984, 1.2898932, 0.42770612, -0.1566984, -0.81682456, -0.43223947, 0.1443238, 1.2898932, 0.38473663, 0.1443238, -0.81682456, -0.43223947, -0.1566984, -0.42996436, -0.045236174, -0.19970158, -1.3329973, 0.38473663, -0.070658386, 1.3329973, 0.38473663, -0.070658386, 1.2898932, 0.42770612, 0.1443238, 0.7902126, -0.43695173, 0.05134475, -1.2898932, 0.38473663, 0.1443238, 0.8489129, -0.4064706, 0.01273704, -1.2898932, 0.38473663, -0.1566984, 1.2898932, 0.38473663, -0.1566984, -0.84891695, -0.4064725, 0.012737232, -0.79005814, -0.43686673, 0.0513293, -1.2830911, 0.43879592, 0.0525043)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kper4"]
+render_priority = 0
+shader = ExtResource("3_gbf2n")
+shader_parameter/albedo_color = Color(0.89, 0.89, 0.89, 1)
+shader_parameter/color_depth = 16.0
+shader_parameter/glossiness = 0.4
+shader_parameter/shadow_intensity = 0.65
+shader_parameter/cull_distance_override = 0.0
+shader_parameter/convert_vertex_colors = false
+
+[node name="MaskBaseHeart" unique_id=1027750743 instance=ExtResource("1_110h2")]
+shape = SubResource("ConvexPolygonShape3D_110h2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="0" unique_id=1467294602]
+material_override = SubResource("ShaderMaterial_kper4")
+
+[node name="enemy-mask-butterfly" parent="." index="1" unique_id=848503328 instance=ExtResource("3_110h2")]
+
+[node name="Cube" parent="enemy-mask-butterfly" index="0" unique_id=904677915]
+surface_material_override/0 = SubResource("ShaderMaterial_kper4")
+
+[editable path="enemy-mask-butterfly"]
