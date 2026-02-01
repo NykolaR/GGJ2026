@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://dvms64x3fxsc"]
+
+[ext_resource type="Script" uid="uid://chx07haf0e0ht" path="res://scenes/player/weapons/bullet_motion.gd" id="1_m4n86"]
+[ext_resource type="Shader" uid="uid://b4nm5xxoeycba" path="res://scenes/player/weapons/bullet_motion.tres" id="2_sttk1"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_m4n86"]
+radius = 0.075
+
+[sub_resource type="SphereMesh" id="SphereMesh_m4n86"]
+radial_segments = 8
+rings = 4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aeonp"]
+render_priority = 0
+shader = ExtResource("2_sttk1")
+
+[node name="BulletMotion" type="Area3D" unique_id=417358106]
+collision_layer = 0
+collision_mask = 5
+input_ray_pickable = false
+monitorable = false
+script = ExtResource("1_m4n86")
+
+[node name="Timer" type="Timer" parent="." unique_id=1001272999]
+one_shot = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=138292007]
+shape = SubResource("SphereShape3D_m4n86")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=47562829]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("SphereMesh_m4n86")
+surface_material_override/0 = SubResource("ShaderMaterial_aeonp")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="queue_free"]

@@ -1,0 +1,25 @@
+[gd_resource type="VisualShader" format=3 uid="uid://b4nm5xxoeycba"]
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_73nga"]
+constant = Color(0.4, 0, 0, 1)
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_wlisd"]
+constant = Color(5.912981, 0.44312045, 0, 1)
+
+[sub_resource type="VisualShaderNodeFresnel" id="VisualShaderNodeFresnel_4ngpg"]
+default_input_values = [2, false, 3, 5.0]
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_cxvnm"]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, Vector3(0.5, 0.5, 0.5)]
+op_type = 3
+
+[resource]
+nodes/fragment/2/node = SubResource("VisualShaderNodeColorConstant_73nga")
+nodes/fragment/2/position = Vector2(-200, 80)
+nodes/fragment/3/node = SubResource("VisualShaderNodeColorConstant_wlisd")
+nodes/fragment/3/position = Vector2(-200, 180)
+nodes/fragment/4/node = SubResource("VisualShaderNodeFresnel_4ngpg")
+nodes/fragment/4/position = Vector2(-500, 300)
+nodes/fragment/5/node = SubResource("VisualShaderNodeMix_cxvnm")
+nodes/fragment/5/position = Vector2(100, 260)
+nodes/fragment/connections = PackedInt32Array(2, 0, 5, 0, 3, 0, 5, 1, 4, 0, 5, 2, 5, 0, 0, 0)

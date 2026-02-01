@@ -2,6 +2,8 @@ extends CharacterBody3D
 
 const BULLET: PackedScene = preload("res://scenes/player/weapons/bullet.tscn")
 const Bullet: GDScript = preload("res://scenes/player/weapons/bullet.gd")
+const BULLET_MOTION: PackedScene = preload("res://scenes/player/weapons/bullet_motion.tscn")
+const BulletMotion: GDScript = preload("res://scenes/player/weapons/bullet_motion.gd")
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -71,16 +73,21 @@ func _on_animation_tree_animation_started(anim_name: StringName) -> void:
 			b.target = $"RotY/RotX/hand/Arm-Armature/Skeleton3D/Arm/PistolBulletTarget".global_position
 			pistol_bullet_spawn.add_child(b)
 		&"Shotgun-shoot":
-			for sg in sgbs:
-				var b: Bullet = BULLET.instantiate()
-				b.damage = baked_gun_level + 1
-				b.target = sg.get_child(0).global_position
-				sg.add_child(b)
+			for i in (baked_gun_level + 2):
+				for sg in sgbs:
+					var b: BulletMotion = BULLET_MOTION.instantiate()
+					b.damage = 1
+					b.lifetime = 0.5
+					b.speed = 0.4
+					b.spread = 0.15
+					sg.add_child(b)
 		&"MachineShoot":
-			var b: Bullet = BULLET.instantiate()
+			var b: BulletMotion = BULLET_MOTION.instantiate()
 			b.damage = baked_gun_level + 1
-			b.target = $"RotY/RotX/hand/Arm-Armature/Skeleton3D/Arm/PistolBulletTarget".global_position
+			b.speed = 0.25
+			b.spread = 0.03
 			pistol_bullet_spawn.add_child(b)
+			$RotY._last_mouse_motion += Vector2(randf_range(-5, 5), randf_range(-7, -1))
 
 
 func set_gun(new: Helper.GUNS) -> void:
