@@ -35,6 +35,7 @@ script = ExtResource("2_1e33p")
 visible = false
 
 [node name="Mask" parent="." index="2" unique_id=1479358489 instance=ExtResource("2_rv0x0")]
+disable_mode = 0
 
 [node name="SpawnTimer" type="Timer" parent="." index="3" unique_id=1023725440]
 wait_time = 10.0

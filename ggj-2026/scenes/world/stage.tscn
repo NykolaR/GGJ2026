@@ -8,13 +8,22 @@ specular_mode = 2
 albedo_texture = ExtResource("3_cwc4s")
 texture_filter = 0
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7qkul"]
+points = PackedVector3Array(0.8660254, 0.01333336, 0.49980426, -0.00016951561, 0.01333336, 1, 0.8660254, -0.026666721, 0.49980426, 0.8660254, 0.01333336, -0.50019574, -0.00016951561, -0.026666721, 1, -0.8660254, 0.01333336, 0.49980426, 0.8660254, -0.026666721, -0.50019574, -0.00016951561, 0.01333336, -1, -0.8660254, -0.026666721, 0.49980426, -0.8660254, 0.01333336, -0.50019574, -0.00016951561, -0.026666721, -1, -0.8660254, -0.026666721, -0.50019574)
+
 [node name="Stage" type="Node3D" unique_id=928063805]
 
 [node name="stage" parent="." unique_id=2075174374 instance=ExtResource("1_1rk7q")]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 
-[node name="Cylinder" parent="stage" index="0" unique_id=145943383]
+[node name="Cylinder" parent="stage" index="0" unique_id=1295495867]
 material_override = SubResource("StandardMaterial3D_7qkul")
+
+[node name="CollisionShape3D" parent="stage/Cylinder/StaticBody3D" parent_id_path=PackedInt32Array(2075174374, 1357071876) index="0" unique_id=908075587]
+disabled = true
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="stage/Cylinder/StaticBody3D" parent_id_path=PackedInt32Array(2075174374, 1357071876) index="1" unique_id=1645139147]
+shape = SubResource("ConvexPolygonShape3D_7qkul")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1441915264]
 material_override = SubResource("StandardMaterial3D_7qkul")

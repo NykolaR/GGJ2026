@@ -4,7 +4,7 @@ extends RigidBody3D
 signal mask_grabbed
 
 func _ready() -> void:
-	
+	$Base.add_child(Helper.mask_bases.pick_random().instantiate())
 	add_cols($Base.get_children())
 
 

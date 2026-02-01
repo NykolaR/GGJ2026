@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://e56j2frq2wsf"]
 
 [ext_resource type="Script" uid="uid://cpiilkkb02rk8" path="res://scenes/mask/mask.gd" id="1_jlvus"]
-[ext_resource type="PackedScene" uid="uid://1b6wiypokfwr" path="res://scenes/enemy/spawning_mask/bases/mask_base_heart.tscn" id="2_61b51"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_61b51"]
 bounce = 0.1
@@ -30,5 +29,3 @@ collision_layer = 8
 [node name="Base" type="RigidBody3D" parent="." unique_id=1944295693]
 process_mode = 4
 collision_layer = 8
-
-[node name="MaskBaseHeart" parent="Base" unique_id=1027750743 instance=ExtResource("2_61b51")]
