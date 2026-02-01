@@ -1,5 +1,9 @@
 extends Node
 
+var mask_bases: Array[PackedScene] = [
+	preload("res://scenes/enemy/spawning_mask/bases/mask_base_heart.tscn")
+]
+
 var player: Node3D
 
 

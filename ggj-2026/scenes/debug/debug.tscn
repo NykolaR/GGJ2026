@@ -10,14 +10,16 @@
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 
-[sub_resource type="Sky" id="Sky_pa0g8"]
+[sub_resource type="Sky" id="Sky_hxnlu"]
 sky_material = SubResource("ProceduralSkyMaterial_fym4n")
 
 [sub_resource type="Environment" id="Environment_oa6p7"]
 background_mode = 1
-sky = SubResource("Sky_pa0g8")
+sky = SubResource("Sky_hxnlu")
 tonemap_mode = 2
 glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0, 0, 0, 1)
 
 [node name="Debug" type="Node3D" unique_id=1680230417]
 
