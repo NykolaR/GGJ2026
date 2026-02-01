@@ -27,7 +27,8 @@ func death() -> void:
 	$CollisionShape3D.disabled = true
 	$Mask.scale = Vector3.ONE * 0.2
 	$Mask.process_mode = Node.PROCESS_MODE_INHERIT
-	$Mask.mask_grabbed.connect(queue_free)
+	if not $Mask.mask_grabbed.is_connected(queue_free):
+		$Mask.mask_grabbed.connect(queue_free)
 	$Mask.apply_torque_impulse(Vector3(randf_range(-1,1), randf_range(-1,1), randf_range(-1,1)))
 	$SpawnTimer.stop()
 	$RespawnTimer.start()
@@ -37,6 +38,11 @@ func death() -> void:
 func _on_spawn_timer_timeout() -> void:
 	for i in spawn_count:
 		var ne: ChasingEnemy = CHASING_ENEMY.instantiate()
+		var nem: Node3D = $Mask.duplicate()
+		nem.set_script(null)
+		nem.transform = Transform3D.IDENTITY
+		nem.scale = Vector3.ONE * 0.2
+		ne.add_child(nem)
 		add_sibling(ne)
 		ne.global_transform = $SpawnTransform.global_transform
 		ne.global_position += Vector3(randf_range(-1, 1), 0, randf_range(-1, 1))

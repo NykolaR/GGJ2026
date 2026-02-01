@@ -20,11 +20,20 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 metadata/_snap_enabled = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rv0x0"]
+transparency = 1
+shading_mode = 2
+albedo_color = Color(5.912981, 0.63325053, 0, 1)
+albedo_texture = SubResource("GradientTexture2D_1e33p")
+emission = Color(2.4907243, 0.15748014, 0, 1)
+emission_energy_multiplier = 6.0
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6i54l"]
 transparency = 1
 shading_mode = 2
 albedo_color = Color(5.912981, 0.63325053, 0, 1)
 albedo_texture = SubResource("GradientTexture2D_1e33p")
+emission_enabled = true
 emission = Color(2.4907243, 0.15748014, 0, 1)
 emission_energy_multiplier = 6.0
 
@@ -48,6 +57,11 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0
 
 [node name="Glow" type="MeshInstance3D" parent="." index="5" unique_id=482499711]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0.51771086)
+mesh = SubResource("QuadMesh_rv0x0")
+surface_material_override/0 = SubResource("StandardMaterial3D_rv0x0")
+
+[node name="Glow2" type="MeshInstance3D" parent="Glow" index="0" unique_id=1278670086]
+transform = Transform3D(0.3, 0, 1.907191e-08, 0, 0.3, 0, -1.907191e-08, 0, 0.3, 3.3546579e-09, 0, 0.052768596)
 mesh = SubResource("QuadMesh_rv0x0")
 surface_material_override/0 = SubResource("StandardMaterial3D_6i54l")
 
