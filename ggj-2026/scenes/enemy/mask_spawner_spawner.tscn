@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://b7akgn8qr8qh2"]
+
+[ext_resource type="Script" uid="uid://624bkj54p4u7" path="res://scenes/enemy/mask_spawner_spawner.gd" id="1_6r6ou"]
+
+[node name="MaskSpawnerSpawner" type="Node3D" unique_id=1275169239]
+script = ExtResource("1_6r6ou")
+
+[node name="Timer" type="Timer" parent="." unique_id=1958945801]
+wait_time = 5.5
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

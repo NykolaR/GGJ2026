@@ -2,8 +2,8 @@ extends "res://scenes/enemy/enemy.gd"
 
 const Player: GDScript = preload("res://scenes/player/player.gd")
 
-@export var speed: float = 0.04
-@export var steer_speed: float = 0.03
+@export var speed: float = 0.05
+@export var steer_speed: float = 0.04
 
 
 func _physics_process(_delta: float) -> void:
