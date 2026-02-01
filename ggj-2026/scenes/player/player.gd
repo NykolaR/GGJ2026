@@ -16,6 +16,9 @@ var baked_gun: Helper.GUNS = Helper.GUNS.NONE
 var baked_gun_level: int = 0
 var gun: Helper.GUNS = Helper.GUNS.NONE: set = set_gun
 
+var fuse_percent: float = 0
+var fusing_mask: String = "none"
+
 @export var camera: Node3D
 @onready var animation: AnimationNodeStateMachinePlayback = $AnimationTree.get("parameters/playback") as AnimationNodeStateMachinePlayback
 @onready var pistol_bullet_spawn: Node3D = $"RotY/RotX/hand/Arm-Armature/Skeleton3D/Arm/PistolBulletSpawn" as Node3D
@@ -24,13 +27,11 @@ var gun: Helper.GUNS = Helper.GUNS.NONE: set = set_gun
 	$"RotY/RotX/hand/Arm-Armature/Skeleton3D/SG1/SG", $"RotY/RotX/hand/Arm-Armature/Skeleton3D/SG2/SG", $"RotY/RotX/hand/Arm-Armature/Skeleton3D/SG3/SG", $"RotY/RotX/hand/Arm-Armature/Skeleton3D/SG4/SG"
 ]
 
-
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	$RotY/RotX/hand.look_at($"RotY/RotX/hand/Arm-Armature/Skeleton3D/Arm/PistolBulletTarget".global_position)
 	Helper.player = $RotY
 	set_gun(Helper.GUNS.NONE)
-
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -68,6 +69,34 @@ func _physics_process(delta: float) -> void:
 			if Input.is_action_pressed(&"shoot"):
 				animation.travel(&"MachineShoot")
 
+	fuse_percent += 0.001
+	
+	if fuse_percent >= 1.0:
+		fuse_percent = 1.0
+		
+	if fuse_percent >= 1.0:
+		baked_gun_level = 2
+	elif fuse_percent >= 0.5:
+		baked_gun_level = 1
+	else:
+		baked_gun_level = 0
+		
+	$"FaceCam/skull-shape/skull".set_blend_shape_value(0, 0.0)
+	$"FaceCam/skull-shape/skull".set_blend_shape_value(1, 0.0)
+	$"FaceCam/skull-shape/skull".set_blend_shape_value(2, 0.0)
+	$"FaceCam/skull-shape/skull".set_blend_shape_value(3, 0.0)
+		
+	match fusing_mask:
+		"butterfly":
+			$"FaceCam/skull-shape/skull".set_blend_shape_value(0, fuse_percent)
+		"diamond":
+			$"FaceCam/skull-shape/skull".set_blend_shape_value(1, fuse_percent)
+		"heart":
+			$"FaceCam/skull-shape/skull".set_blend_shape_value(2, fuse_percent)
+		"goblin":
+			$"FaceCam/skull-shape/skull".set_blend_shape_value(3, fuse_percent)
+		
+
 
 func _on_animation_tree_animation_started(anim_name: StringName) -> void:
 	match anim_name:
@@ -95,6 +124,11 @@ func _on_animation_tree_animation_started(anim_name: StringName) -> void:
 
 
 func set_gun(new: Helper.GUNS) -> void:
+	$"FaceCam/skull-shape/heart".hide()
+	$"FaceCam/skull-shape/goblin".hide()
+	$"FaceCam/skull-shape/butterfly".hide()
+	$"FaceCam/skull-shape/diamond".hide()
+	
 	if gun == Helper.GUNS.NONE and not new == Helper.GUNS.NONE:
 		var tween: Tween = create_tween()
 		tween.tween_property($OmniLight3D, "light_energy", 1.0, 1.0)
@@ -102,26 +136,39 @@ func set_gun(new: Helper.GUNS) -> void:
 	gun = new
 	if gun == Helper.GUNS.HARPOON:
 		gun = Helper.GUNS.PISTOL
-	match gun:
-		Helper.GUNS.NONE:
-			animation.start(&"Rest")
-		Helper.GUNS.PISTOL:
-			animation.start(&"Pistol-idle")
-			$"FaceCam/skull-shape/heart".show()
-		Helper.GUNS.MACHINE:
-			animation.start(&"Machine-idle")
-			$"FaceCam/skull-shape/goblin".show()
-		Helper.GUNS.SHOTGUN:
-			animation.start(&"Shotgun-idle")
-			$"FaceCam/skull-shape/butterfly".show()
-
-
+		$"FaceCam/skull-shape/diamond".show()
+		animation.start(&"Pistol-idle")
+		add_mask("diamond")
+	else:
+		match gun:
+			Helper.GUNS.NONE:
+				animation.start(&"Rest")
+			Helper.GUNS.PISTOL:
+				animation.start(&"Pistol-idle")
+				$"FaceCam/skull-shape/heart".show()
+				add_mask("heart")
+			Helper.GUNS.MACHINE:
+				animation.start(&"Machine-idle")
+				$"FaceCam/skull-shape/goblin".show()
+				add_mask("goblin")
+			Helper.GUNS.SHOTGUN:
+				animation.start(&"Shotgun-idle")
+				$"FaceCam/skull-shape/butterfly".show()
+				add_mask("butterfly")
+				
 func _on_mask_body_entered(body: Node3D) -> void:
 	if body is Mask:
 		gun = body.base.type
 		body.pick_up_mask()
 		body.queue_free()
 
+
+func add_mask(mask: String) -> void:
+	if mask == fusing_mask:
+		fuse_percent += 0.1
+	else: 
+		fusing_mask = mask
+		fuse_percent = 0.0
 
 func fuse_mask() -> void:
 	pass
