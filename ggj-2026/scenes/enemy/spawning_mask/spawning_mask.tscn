@@ -30,8 +30,9 @@ emission_energy_multiplier = 6.0
 
 [node name="SpawningMask" unique_id=689310269 instance=ExtResource("1_2mpkn")]
 script = ExtResource("2_1e33p")
+spawn_count = 1
 
-[node name="Mask" parent="." index="1" unique_id=1479358489 instance=ExtResource("2_rv0x0")]
+[node name="Mask" parent="." index="0" unique_id=1479358489 instance=ExtResource("2_rv0x0")]
 disable_mode = 0
 
 [node name="SpawnTimer" type="Timer" parent="." index="2" unique_id=1023725440]

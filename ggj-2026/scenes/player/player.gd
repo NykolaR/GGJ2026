@@ -92,6 +92,8 @@ func _on_animation_tree_animation_started(anim_name: StringName) -> void:
 
 func set_gun(new: Helper.GUNS) -> void:
 	gun = new
+	if gun == Helper.GUNS.HARPOON:
+		gun = Helper.GUNS.PISTOL
 	match gun:
 		Helper.GUNS.NONE:
 			animation.start(&"Rest")

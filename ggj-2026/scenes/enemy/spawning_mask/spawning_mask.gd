@@ -3,7 +3,18 @@ extends "res://scenes/enemy/enemy.gd"
 const CHASING_ENEMY: PackedScene = preload("res://scenes/enemy/chasing_enemy/chasing_enemy.tscn")
 const ChasingEnemy: GDScript = preload("res://scenes/enemy/chasing_enemy/chasing_enemy.gd")
 
+@export var spawn_count: int = 1
 @onready var max_health: int = health
+
+
+func _ready() -> void:
+	match $Mask.base.type:
+		Helper.GUNS.PISTOL:
+			$RespawnTimer.wait_time = 15
+		Helper.GUNS.MACHINE:
+			$SpawnTimer.wait_time = 2.5
+		Helper.GUNS.SHOTGUN:
+			spawn_count = 4
 
 
 func _physics_process(_delta: float) -> void:
@@ -24,9 +35,11 @@ func death() -> void:
 
 
 func _on_spawn_timer_timeout() -> void:
-	var ne: ChasingEnemy = CHASING_ENEMY.instantiate()
-	add_sibling(ne)
-	ne.global_transform = $SpawnTransform.global_transform
+	for i in spawn_count:
+		var ne: ChasingEnemy = CHASING_ENEMY.instantiate()
+		add_sibling(ne)
+		ne.global_transform = $SpawnTransform.global_transform
+		ne.global_position += Vector3(randf_range(-1, 1), 0, randf_range(-1, 1))
 
 
 func _on_respawn_timer_timeout() -> void:

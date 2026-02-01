@@ -21,13 +21,14 @@ shader_parameter/convert_vertex_colors = false
 [node name="MaskBaseHeart" unique_id=1027750743 instance=ExtResource("1_0eyt3")]
 shape = SubResource("ConvexPolygonShape3D_0eyt3")
 script = ExtResource("2_1umfq")
+type = 4
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="0" unique_id=1467294602]
 material_override = SubResource("ShaderMaterial_hxfq1")
 
 [node name="enemy-mask-diamond" parent="." index="1" unique_id=2108369275 instance=ExtResource("3_0eyt3")]
 
-[node name="Cube_001" parent="enemy-mask-diamond" index="0" unique_id=1300601229]
+[node name="Cube_001" parent="enemy-mask-diamond" index="0" unique_id=1978939164]
 surface_material_override/0 = SubResource("ShaderMaterial_hxfq1")
 
 [editable path="enemy-mask-diamond"]
