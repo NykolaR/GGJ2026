@@ -1,6 +1,6 @@
 extends Node
 
-enum GUNS {PISTOL, MACHINE, SHOTGUN, HARPOON}
+enum GUNS {NONE, PISTOL, MACHINE, SHOTGUN, HARPOON}
 enum MODIFIERS {NONE}
 
 var mask_bases: Array[PackedScene] = [

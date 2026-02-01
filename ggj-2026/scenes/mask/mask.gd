@@ -1,10 +1,14 @@
 extends RigidBody3D
 
+const MaskBase: GDScript = preload("res://scenes/enemy/spawning_mask/bases/mask_base.gd")
+
+var base: MaskBase
 
 signal mask_grabbed
 
 func _ready() -> void:
-	$Base.add_child(Helper.mask_bases.pick_random().instantiate())
+	base = Helper.mask_bases.pick_random().instantiate()
+	$Base.add_child(base)
 	add_cols($Base.get_children())
 
 

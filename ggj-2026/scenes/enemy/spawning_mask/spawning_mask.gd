@@ -5,13 +5,14 @@ const ChasingEnemy: GDScript = preload("res://scenes/enemy/chasing_enemy/chasing
 
 @onready var max_health: int = health
 
+
 func _physics_process(_delta: float) -> void:
 	if Helper.player:
 		look_at(Helper.player.global_position)
 
 
 func death() -> void:
-	$MeshInstance3D.hide()
+	$Glow.hide()
 	$CollisionShape3D.disabled = true
 	$Mask.scale = Vector3.ONE * 0.2
 	$Mask.process_mode = Node.PROCESS_MODE_INHERIT
@@ -38,6 +39,7 @@ func _on_respawn_timer_timeout() -> void:
 
 
 func respawned() -> void:
+	$Glow.show()
 	health = max_health
 	$CollisionShape3D.disabled = false
 	set_physics_process(true)

@@ -3,8 +3,7 @@
 [ext_resource type="Script" uid="uid://dhije8l7d3s6u" path="res://scenes/enemy/enemy.gd" id="1_4a83h"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_883im"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_4a83h"]
+radius = 1.0
 
 [node name="Enemy" type="Area3D" unique_id=689310269]
 collision_layer = 4
@@ -13,6 +12,3 @@ script = ExtResource("1_4a83h")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1436251806]
 shape = SubResource("SphereShape3D_883im")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1925874497]
-mesh = SubResource("SphereMesh_4a83h")

@@ -24,11 +24,26 @@ shader_parameter/uv_scroll_speed = Vector2(0, 0)
 shader_parameter/cull_distance_override = 0.0
 shader_parameter/convert_vertex_colors = false
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0owmy"]
+animation = &"Machine-idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qek5x"]
+animation = &"MachineShoot"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p47bc"]
 animation = &"Pistol-idle"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_75vfm"]
 animation = &"Pistol-shoot"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5gtgg"]
+animation = &"Rest"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h17s1"]
+animation = &"Shotgun-idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_je7p5"]
+animation = &"Shotgun-shoot"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0owmy"]
 
@@ -36,16 +51,40 @@ animation = &"Pistol-shoot"
 switch_mode = 2
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5gtgg"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fm80t"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gx1jg"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ugbui"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fcs02"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_myrg7"]
+switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_h17s1"]
+states/End/position = Vector2(1139, 96)
+states/Machine-idle/node = SubResource("AnimationNodeAnimation_0owmy")
+states/Machine-idle/position = Vector2(783, 98)
+states/MachineShoot/node = SubResource("AnimationNodeAnimation_qek5x")
+states/MachineShoot/position = Vector2(783, 303)
 states/Pistol-idle/node = SubResource("AnimationNodeAnimation_p47bc")
-states/Pistol-idle/position = Vector2(400.88672, 100)
+states/Pistol-idle/position = Vector2(592.8867, 100)
 states/Pistol-shoot/node = SubResource("AnimationNodeAnimation_75vfm")
-states/Pistol-shoot/position = Vector2(400.88672, 213.67188)
+states/Pistol-shoot/position = Vector2(592.8867, 314.67188)
+states/Rest/node = SubResource("AnimationNodeAnimation_5gtgg")
+states/Rest/position = Vector2(435, 95)
+states/Shotgun-idle/node = SubResource("AnimationNodeAnimation_h17s1")
+states/Shotgun-idle/position = Vector2(975, 94)
+states/Shotgun-shoot/node = SubResource("AnimationNodeAnimation_je7p5")
+states/Shotgun-shoot/position = Vector2(975, 303)
 states/Start/position = Vector2(198.33984, 100)
-transitions = ["Pistol-idle", "Pistol-shoot", SubResource("AnimationNodeStateMachineTransition_0owmy"), "Pistol-shoot", "Pistol-idle", SubResource("AnimationNodeStateMachineTransition_qek5x"), "Start", "Pistol-idle", SubResource("AnimationNodeStateMachineTransition_5gtgg")]
+transitions = ["Pistol-idle", "Pistol-shoot", SubResource("AnimationNodeStateMachineTransition_0owmy"), "Pistol-shoot", "Pistol-idle", SubResource("AnimationNodeStateMachineTransition_qek5x"), "Start", "Rest", SubResource("AnimationNodeStateMachineTransition_fm80t"), "Machine-idle", "MachineShoot", SubResource("AnimationNodeStateMachineTransition_gx1jg"), "MachineShoot", "Machine-idle", SubResource("AnimationNodeStateMachineTransition_ugbui"), "Shotgun-idle", "Shotgun-shoot", SubResource("AnimationNodeStateMachineTransition_fcs02"), "Shotgun-shoot", "Shotgun-idle", SubResource("AnimationNodeStateMachineTransition_myrg7")]
+graph_offset = Vector2(110, 19)
 
 [node name="Player" type="CharacterBody3D" unique_id=1786887011 node_paths=PackedStringArray("camera")]
 collision_layer = 2
@@ -62,20 +101,22 @@ script = ExtResource("2_dovo2")
 
 [node name="RotX" type="Node3D" parent="RotY" unique_id=1158049050]
 
-[node name="hand" parent="RotY/RotX" unique_id=2065130696 instance=ExtResource("3_p47bc")]
+[node name="hand" parent="RotY/RotX" unique_id=1616852155 instance=ExtResource("3_p47bc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20633817, -0.16909224, -5.9604645e-08)
 
-[node name="Skeleton3D" parent="RotY/RotX/hand/Arm-Armature" parent_id_path=PackedInt32Array(2065130696, 877236892) index="0" unique_id=936366653]
-bones/0/rotation = Quaternion(-0.5, 0.50000006, -0.5, 0.5)
-bones/3/rotation = Quaternion(7.700781e-16, -1.04649094e-16, -0.13465647, 0.99089235)
-bones/4/rotation = Quaternion(0.026809711, -0.017022237, 0.53496635, 0.8442763)
-bones/5/rotation = Quaternion(0.031216707, -0.022076419, -0.16551057, 0.98546666)
-bones/6/rotation = Quaternion(-0.5723358, -0.054645393, -0.072554186, 0.8149734)
-bones/7/rotation = Quaternion(-0.8679884, -0.12654175, 0.06079825, 0.47632664)
-bones/8/rotation = Quaternion(-0.49338496, -0.20599963, -0.3010631, 0.78961784)
-bones/9/rotation = Quaternion(-0.7028759, -0.31664586, 0.2649731, 0.5792151)
+[node name="Skeleton3D" parent="RotY/RotX/hand/Arm-Armature" parent_id_path=PackedInt32Array(1616852155, 1720216558) index="0" unique_id=46843866]
+bones/0/rotation = Quaternion(-0.7071068, 0, 0, 0.7071068)
+bones/1/rotation = Quaternion(-0.5646381, -0.024727734, -0.0163793, 0.8248055)
+bones/2/rotation = Quaternion(-0.06566717, 0.002948672, 0.16091341, 0.9847772)
+bones/3/rotation = Quaternion(-0.09831585, -0.00018441211, -0.13172759, 0.9863984)
+bones/4/rotation = Quaternion(-0.06290485, 0.01907482, 0.39913455, 0.9145331)
+bones/5/rotation = Quaternion(-0.09461387, 0.02672562, -0.34560665, 0.9332149)
+bones/6/rotation = Quaternion(-0.06446876, -0.0128314085, -0.079114296, 0.994696)
+bones/7/rotation = Quaternion(-0.0948732, -0.025789909, 0.0858471, 0.9914456)
+bones/8/rotation = Quaternion(-0.057419002, -0.03199888, -0.38058823, 0.9224055)
+bones/9/rotation = Quaternion(-0.080858044, -0.05592866, 0.3604001, 0.92760223)
 
-[node name="Arm" parent="RotY/RotX/hand/Arm-Armature/Skeleton3D" index="0" unique_id=1924045855]
+[node name="Arm" parent="RotY/RotX/hand/Arm-Armature/Skeleton3D" index="0" unique_id=2008527272]
 surface_material_override/0 = SubResource("ShaderMaterial_qek5x")
 
 [node name="PistolBulletSpawn" type="Node3D" parent="RotY/RotX/hand/Arm-Armature/Skeleton3D/Arm" index="0" unique_id=357589825]
@@ -83,6 +124,50 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.021836579, -0.57017285)
 
 [node name="PistolBulletTarget" type="Node3D" parent="RotY/RotX/hand/Arm-Armature/Skeleton3D/Arm" index="1" unique_id=224117691]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+
+[node name="SG1" type="BoneAttachment3D" parent="RotY/RotX/hand/Arm-Armature/Skeleton3D" index="1" unique_id=1192832252]
+transform = Transform3D(0.99257755, 0.10799958, -0.05590758, 0.11044618, -0.99296474, 0.04268992, -0.050903782, -0.048547804, -0.99752295, 0.041743558, -0.1359585, -0.3755168)
+bone_name = "Bone.09"
+bone_idx = 9
+
+[node name="SG" type="Node3D" parent="RotY/RotX/hand/Arm-Armature/Skeleton3D/SG1" unique_id=1887898814]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+
+[node name="SGD" type="Node3D" parent="RotY/RotX/hand/Arm-Armature/Skeleton3D/SG1/SG" unique_id=770754360]
+transform = Transform3D(1.0000001, 5.820766e-09, 0, 6.9849193e-10, 1, 3.7252903e-09, 0, -3.7252903e-09, 1.0000001, 0, 0, -10)
+
+[node name="SG2" type="BoneAttachment3D" parent="RotY/RotX/hand/Arm-Armature/Skeleton3D" index="2" unique_id=491630250]
+transform = Transform3D(0.9970403, 0.05277463, -0.055907607, 0.055196047, -0.9975627, 0.042689905, -0.053518377, -0.045649394, -0.9975229, 0.019323401, -0.1629685, -0.38137773)
+bone_name = "Bone.07"
+bone_idx = 7
+
+[node name="SG" type="Node3D" parent="RotY/RotX/hand/Arm-Armature/Skeleton3D/SG2" unique_id=1300428383]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+
+[node name="SGD" type="Node3D" parent="RotY/RotX/hand/Arm-Armature/Skeleton3D/SG2/SG" unique_id=451247101]
+transform = Transform3D(1.0000001, 5.820766e-09, 0, 6.9849193e-10, 1, 3.7252903e-09, 0, -3.7252903e-09, 1.0000001, 0, 0, -10)
+
+[node name="SG3" type="BoneAttachment3D" parent="RotY/RotX/hand/Arm-Armature/Skeleton3D" index="3" unique_id=1921056839]
+transform = Transform3D(0.9973434, -0.046696596, -0.055907585, -0.04433915, -0.9981041, 0.04268983, -0.057795044, -0.040097505, -0.99752295, -0.03094057, -0.1432485, -0.37502402)
+bone_name = "Bone.01"
+bone_idx = 5
+
+[node name="SG" type="Node3D" parent="RotY/RotX/hand/Arm-Armature/Skeleton3D/SG3" unique_id=1701679369]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+
+[node name="SGD" type="Node3D" parent="RotY/RotX/hand/Arm-Armature/Skeleton3D/SG3/SG" unique_id=4086022]
+transform = Transform3D(1.0000001, 5.820766e-09, 0, 6.9849193e-10, 1, 3.7252903e-09, 0, -3.7252903e-09, 1.0000001, 0, 0, -10)
+
+[node name="SG4" type="BoneAttachment3D" parent="RotY/RotX/hand/Arm-Armature/Skeleton3D" index="4" unique_id=452479758]
+transform = Transform3D(0.99840015, 0.008453385, -0.055907562, 0.010849188, -0.9990294, 0.042689845, -0.05549245, -0.043228015, -0.99752295, -0.008167496, -0.15685865, -0.3790381)
+bone_name = "Bone.05"
+bone_idx = 3
+
+[node name="SG" type="Node3D" parent="RotY/RotX/hand/Arm-Armature/Skeleton3D/SG4" unique_id=895808307]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+
+[node name="SGD" type="Node3D" parent="RotY/RotX/hand/Arm-Armature/Skeleton3D/SG4/SG" unique_id=131656689]
+transform = Transform3D(1.0000001, 5.820766e-09, 0, 6.9849193e-10, 1, 3.7252903e-09, 0, -3.7252903e-09, 1.0000001, 0, 0, -10)
 
 [node name="Camera3D" type="Camera3D" parent="RotY/RotX" unique_id=695863509]
 current = true
