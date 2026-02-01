@@ -1,5 +1,8 @@
 extends Node
 
+enum GUNS {PISTOL, MACHINE, SHOTGUN, HARPOON}
+enum MODIFIERS {NONE}
+
 var mask_bases: Array[PackedScene] = [
 	preload("res://scenes/enemy/spawning_mask/bases/mask_base_butterfly.tscn"),
 	preload("res://scenes/enemy/spawning_mask/bases/mask_base_diamond.tscn"),

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cnwo5cxm8quu7"]
 
 [ext_resource type="PackedScene" uid="uid://sn3sna5uoatn" path="res://scenes/enemy/spawning_mask/mask_piece.tscn" id="1_110h2"]
+[ext_resource type="Script" uid="uid://dkorggwyq1dfc" path="res://scenes/enemy/spawning_mask/bases/mask_base.gd" id="2_1ra0p"]
 [ext_resource type="PackedScene" uid="uid://cp3qgr11jioh4" path="res://assets/models/masks/base/enemy-mask-butterfly.gltf" id="3_110h2"]
 [ext_resource type="Shader" uid="uid://deoh6ruh3calf" path="res://ursc/spatial/shiny/shiny_opaque.gdshader" id="3_gbf2n"]
 
@@ -19,6 +20,8 @@ shader_parameter/convert_vertex_colors = false
 
 [node name="MaskBaseHeart" unique_id=1027750743 instance=ExtResource("1_110h2")]
 shape = SubResource("ConvexPolygonShape3D_110h2")
+script = ExtResource("2_1ra0p")
+type = 3
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="0" unique_id=1467294602]
 material_override = SubResource("ShaderMaterial_kper4")
